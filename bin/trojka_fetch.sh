@@ -24,17 +24,17 @@ PID_MP3=$!
 
 # 20 minutes
 sleep 1200
-TITLE20=`curl -s http://player.polskieradio.pl/-3 | grep 'program-title' | sed -E 's/.*>(.*)<.*/\1/' | php -R 'echo html_entity_decode($argn), "\n";' | tr '/?' '__'`
+TITLE20=`$HOME/bin/trojka_get_title.py`
 TITLE="$TITLE20"
 
 # 40 minutes
 sleep 1200
-TITLE40=`curl -s http://player.polskieradio.pl/-3 | grep 'program-title' | sed -E 's/.*>(.*)<.*/\1/' | php -R 'echo html_entity_decode($argn), "\n";' | tr '/?' '__'`
+TITLE40=`$HOME/bin/trojka_get_title.py`
 [ "$TITLE20" == "$TITLE40" ] || TITLE="$TITLE, $TITLE40"
 
 # 55 minutes
 sleep 900
-TITLE55=`curl -s http://player.polskieradio.pl/-3 | grep 'program-title' | sed -E 's/.*>(.*)<.*/\1/' | php -R 'echo html_entity_decode($argn), "\n";' | tr '/?' '__'`
+TITLE55=`$HOME/bin/trojka_get_title.py`
 [ "$TITLE20" == "$TITLE55" -o "$TITLE40" == "$TITLE55" ] || TITLE="$TITLE, $TITLE55"
 
 # 60 minutes - 10 seconds
